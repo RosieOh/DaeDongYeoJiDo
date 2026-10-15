@@ -1,0 +1,1961 @@
+.journey-page {
+  position: relative !important;
+  display: block !important;
+  isolation: isolate;
+  background: #dce5d9;
+  overflow: hidden;
+}
+.journey-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  outline: none !important;
+}
+.journey-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      #eef0e32e,
+      transparent 30%,
+      transparent 60%,
+      #263b3926
+    ),
+    linear-gradient(90deg, #f2f0de40, transparent 28%);
+}
+.journey-topbar {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.journey-back {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #f6f6e9d9;
+  border: 1px solid #fff9;
+  padding: 10px 14px;
+  border-radius: 5px;
+  font-size: 11px;
+  backdrop-filter: blur(12px);
+}
+.journey-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #49685c;
+  text-shadow: 0 1px 8px #ffffff99;
+}
+.journey-live {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #52745a;
+}
+.journey-title b {
+  font-size: 7px;
+  letter-spacing: 1.1px;
+  border: 1px solid #6c867e55;
+  padding: 3px 5px;
+  font-weight: 500;
+  border-radius: 2px;
+}
+.journey-tools {
+  display: flex;
+  gap: 6px;
+}
+.journey-tools button {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  background: #f9f9edcc;
+  border: 1px solid #fff8;
+  border-radius: 5px;
+  color: #4f6b5d;
+  backdrop-filter: blur(10px);
+}
+.journey-tools button:hover {
+  background: #fffdef;
+}
+.journey-location {
+  position: absolute;
+  left: 36px;
+  top: 96px;
+  color: #304e44;
+  pointer-events: none;
+}
+.journey-location > span {
+  font-size: 10px;
+  letter-spacing: 1.3px;
+  color: #687f6f;
+}
+.journey-location h1 {
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin: 12px 0 15px;
+  text-shadow: 0 2px 20px #fff9;
+}
+.journey-location h1 small {
+  display: block;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  margin-top: 6px;
+}
+.journey-location label {
+  pointer-events: auto;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 11px;
+  width: max-content;
+  padding: 6px 8px 6px 0;
+}
+.journey-location select {
+  font-size: 11px;
+  border: 0;
+  color: #4a6758;
+  background: transparent;
+  appearance: none;
+  max-width: 175px;
+  cursor: pointer;
+}
+.journey-location > p {
+  font-size: 9px;
+  color: #788879;
+  margin-top: 10px;
+}
+.journey-quest {
+  position: absolute;
+  right: 28px;
+  top: 89px;
+  width: 247px;
+  background: #f8f8ebd4;
+  border: 1px solid #ffffdba8;
+  border-radius: 8px;
+  padding: 19px 19px 15px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px #3e60540d;
+}
+.quest-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+.quest-heading > span {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.quest-heading > b {
+  font-size: 14px;
+  color: #876d47;
+  font-weight: 500;
+}
+.quest-heading i {
+  font-size: 10px;
+  font-style: normal;
+  color: #a0a18c;
+}
+.quest-progress {
+  height: 2px;
+  background: #dfe3d1;
+  margin: 14px 0 8px;
+}
+.quest-progress > span {
+  display: block;
+  background: #b39b65;
+  height: 100%;
+  transition: width 0.4s;
+}
+.quest-stop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  color: #8e9782;
+}
+.quest-stop > span:first-child {
+  width: 19px;
+  height: 19px;
+  border: 1px solid #c4cbb5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8px;
+  flex-shrink: 0;
+}
+.quest-stop > div {
+  flex: 1;
+}
+.quest-stop strong {
+  font-size: 11px;
+  font-weight: 500;
+  display: block;
+}
+.quest-stop small {
+  font-size: 8px;
+  display: block;
+  margin-top: 4px;
+  color: #a0a58c;
+}
+.quest-stop.next {
+  color: #4f6550;
+}
+.quest-stop.next > span:first-child {
+  border-color: #b29a69;
+  color: #9b7d48;
+}
+.quest-stop.discovered > span:first-child {
+  background: #5f8065;
+  border-color: #5f8065;
+  color: white;
+}
+.quest-distance {
+  font-size: 9px;
+  color: #a08a5b;
+}
+.journey-quest > p {
+  font-size: 9px;
+  line-height: 1.7;
+  border-top: 1px solid #dfe3d1;
+  padding-top: 11px;
+  margin: 4px 0 0;
+  color: #8e987f;
+  word-break: keep-all;
+}
+.journey-minimap {
+  position: absolute;
+  left: 30px;
+  bottom: 85px;
+  width: 142px;
+  border: 1px solid #fbffdbb3;
+  border-radius: 8px;
+  padding: 9px;
+  background: #faf9e8d6;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px #314d3c15;
+}
+.journey-minimap > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 8px;
+  color: #738268;
+  margin: 0 1px 7px;
+}
+.journey-minimap > svg {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+}
+.journey-minimap > span {
+  font-size: 8px;
+  color: #809171;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 8px;
+}
+.journey-minimap i {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #abb79a;
+}
+.journey-interact {
+  position: absolute;
+  left: 50%;
+  bottom: 90px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #f9f7e9e8;
+  border: 1px solid #fffeeccc;
+  border-radius: 7px;
+  padding: 14px 16px;
+  width: 310px;
+  box-shadow: 0 10px 35px #344b3210;
+  backdrop-filter: blur(10px);
+}
+.interact-symbol {
+  border: 1px solid #d9ddc7;
+  border-radius: 50%;
+  height: 34px;
+  width: 34px;
+  display: grid;
+  place-items: center;
+  color: #a8aa88;
+}
+.journey-interact > div {
+  flex: 1;
+}
+.journey-interact small {
+  display: block;
+  color: #979d80;
+  font-size: 9px;
+  margin-bottom: 4px;
+}
+.journey-interact strong {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7b60;
+}
+.journey-interact > button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  color: #a6ad92;
+}
+.journey-interact kbd {
+  font-size: 11px;
+  border: 1px solid #c9d0b8;
+  background: #fff9;
+  padding: 4px 7px;
+  border-radius: 3px;
+}
+.journey-interact.available {
+  border-color: #ddc595;
+  background: #f9f4e6ed;
+}
+.journey-interact.available .interact-symbol {
+  color: #b3985f;
+  border-color: #d5bf91;
+}
+.journey-interact.available > button {
+  color: #496845;
+}
+.journey-interact.available kbd {
+  background: #527051;
+  color: white;
+  border-color: #527051;
+}
+.journey-controls {
+  position: absolute;
+  bottom: 23px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #f3f3e4;
+  text-shadow: 0 1px 5px #263d39;
+}
+.journey-controls > div {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+.journey-controls kbd {
+  font-family: inherit;
+  border: 1px solid #fafbe873;
+  border-radius: 3px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  padding: 4px 6px;
+  margin-right: 5px;
+  background: #f5f8e818;
+}
+.journey-controls > button {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: #eaf0db;
+  font-size: 10px;
+}
+.journey-touch {
+  display: none;
+}
+.journey-loading,
+.journey-pause {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #e8eddfdb;
+  backdrop-filter: blur(9px);
+  text-align: center;
+  color: #527462;
+}
+.journey-loading h2,
+.journey-pause h2 {
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.7px;
+  margin: 18px 0;
+}
+.journey-loading p,
+.journey-pause p {
+  font-size: 12px;
+  line-height: 2;
+  color: #82917a;
+  word-break: keep-all;
+}
+.journey-loading button,
+.journey-pause button {
+  padding: 13px 22px;
+  background: #466b55;
+  color: white;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.journey-pause > div {
+  padding: 30px;
+}
+.journey-pause > div > span {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #9b9f7a;
+}
+.journey-discovery {
+  position: absolute;
+  right: 28px;
+  bottom: 80px;
+  width: 340px;
+  background: #fcf9efed;
+  backdrop-filter: blur(12px);
+  border: 1px solid #fff7dc;
+  border-radius: 9px;
+  box-shadow: 0 10px 35px #20342915;
+  padding: 26px;
+  animation: slide-in 0.3s;
+  z-index: 5;
+}
+.journey-discovery > button:first-child {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  color: #8b967d;
+}
+.discovery-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  color: #ad945f;
+}
+.journey-discovery h2 {
+  font-size: 23px;
+  font-weight: 500;
+  color: #3f5b49;
+  letter-spacing: -0.5px;
+  margin: 16px 0;
+}
+.journey-discovery > p {
+  font-size: 12px;
+  line-height: 1.95;
+  color: #808c75;
+  word-break: keep-all;
+}
+.journey-discovery > small {
+  font-size: 9px;
+  color: #a4a78d;
+}
+.continue-walk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 0 0;
+  border-top: 1px solid #dfe3d2;
+  margin-top: 18px;
+  color: #4e7157;
+  font-size: 11px;
+}
+.journey-toast {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 13px 20px;
+  background: #335647ee;
+  color: #f8f5e3;
+  border: 1px solid #c7cb9b30;
+  border-radius: 5px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 11px;
+  z-index: 8;
+  box-shadow: 0 8px 25px #25403720;
+}
+.journey-tools button:disabled,
+.journey-interact > button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+.enter-journey {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 10px;
+  border: 1px solid #b8c7a3;
+  border-radius: 5px;
+  background: #edf0e1;
+  color: #56714e;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+.enter-journey span {
+  font-size: 7px;
+  letter-spacing: 1px;
+  border: 1px solid #bec7a9;
+  padding: 2px 3px;
+  border-radius: 2px;
+  margin-left: 4px;
+}
+@media (max-width: 1000px) {
+  .header {
+    gap: 25px;
+  }
+  .header nav {
+    gap: 22px;
+  }
+  .journey-quest {
+    width: 214px;
+    padding: 15px;
+    right: 20px;
+  }
+  .journey-location {
+    left: 25px;
+  }
+  .journey-topbar {
+    left: 20px;
+    right: 20px;
+  }
+  .journey-controls > div {
+    gap: 12px;
+  }
+  .journey-minimap {
+    width: 122px;
+    left: 20px;
+  }
+  .journey-interact {
+    width: 280px;
+  }
+  .journey-discovery {
+    width: 310px;
+    right: 20px;
+  }
+}
+@media (max-width: 760px) {
+  .header {
+    gap: 10px;
+    padding: 0 12px;
+  }
+  .header nav {
+    gap: 12px;
+  }
+  .header nav button {
+    font-size: 10px;
+  }
+  .header nav button svg {
+    display: none;
+  }
+  .brand > img {
+    width: 30px;
+    height: 30px;
+  }
+  .brand strong {
+    font-size: 16px;
+  }
+  .brand small {
+    font-size: 5px;
+    letter-spacing: 1.7px;
+  }
+  .brand-seal {
+    display: none;
+  }
+  .journey-topbar {
+    left: 15px;
+    right: 15px;
+    top: 14px;
+  }
+  .journey-back {
+    padding: 8px;
+    background: #f8f8eaaa;
+  }
+  .journey-back span,
+  .journey-title {
+    display: none;
+  }
+  .journey-tools {
+    gap: 5px;
+  }
+  .journey-tools button {
+    width: 31px;
+    height: 31px;
+  }
+  .journey-tools button:nth-child(2) {
+    display: none;
+  }
+  .journey-location {
+    left: 18px;
+    top: 72px;
+  }
+  .journey-location > span {
+    font-size: 8px;
+    letter-spacing: 0.4px;
+  }
+  .journey-location h1 {
+    font-size: 23px;
+    margin: 8px 0;
+  }
+  .journey-location h1 small {
+    font-size: 14px;
+    margin-top: 3px;
+  }
+  .journey-location > p {
+    font-size: 7px;
+    max-width: 160px;
+    line-height: 1.5;
+  }
+  .journey-location label,
+  .journey-location select {
+    font-size: 9px;
+  }
+  .journey-quest {
+    width: 137px;
+    right: 13px;
+    top: 69px;
+    padding: 11px;
+  }
+  .quest-heading {
+    font-size: 9px;
+    gap: 5px;
+  }
+  .quest-heading > span {
+    gap: 4px;
+  }
+  .quest-heading > span > svg {
+    width: 12px;
+  }
+  .quest-heading > b {
+    font-size: 12px;
+  }
+  .quest-heading i {
+    font-size: 8px;
+  }
+  .quest-stop {
+    gap: 6px;
+    padding: 9px 0;
+  }
+  .quest-stop strong {
+    font-size: 9px;
+  }
+  .quest-stop small,
+  .quest-distance,
+  .journey-quest > p {
+    display: none;
+  }
+  .quest-stop > span:first-child {
+    height: 15px;
+    width: 15px;
+    font-size: 7px;
+  }
+  .quest-progress {
+    margin: 10px 0 5px;
+  }
+  .journey-minimap {
+    left: auto;
+    right: 16px;
+    bottom: 182px;
+    width: 86px;
+    padding: 6px;
+  }
+  .journey-minimap > div {
+    font-size: 7px;
+    margin-bottom: 4px;
+  }
+  .journey-minimap > span {
+    font-size: 6px;
+    margin-top: 5px;
+    gap: 4px;
+  }
+  .journey-interact {
+    bottom: 39px;
+    width: 240px;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .interact-symbol {
+    width: 29px;
+    height: 29px;
+  }
+  .journey-interact small {
+    font-size: 8px;
+  }
+  .journey-interact strong {
+    font-size: 11px;
+  }
+  .journey-interact > button {
+    font-size: 9px;
+  }
+  .journey-interact kbd {
+    display: none;
+  }
+  .journey-controls {
+    left: 18px;
+    right: 18px;
+    bottom: 12px;
+    justify-content: center;
+  }
+  .journey-controls > div {
+    display: none;
+  }
+  .journey-controls > button {
+    font-size: 8px;
+  }
+  .journey-touch {
+    position: absolute;
+    bottom: 108px;
+    left: 22px;
+    right: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+  }
+  .touch-stick {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #fff7;
+    border-radius: 50%;
+    background: #f8f5dd25;
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    pointer-events: auto;
+    touch-action: none;
+  }
+  .touch-stick > svg {
+    position: absolute;
+    top: 7px;
+    color: #f9f7e6a3;
+    transform: rotate(-45deg);
+  }
+  .touch-stick i {
+    display: block;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: #f9f7e8bb;
+    border: 1px solid #fff6;
+    box-shadow: 0 2px 10px #2946301a;
+    pointer-events: none;
+  }
+  .journey-touch button {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 57px;
+    height: 57px;
+    background: #f6f4df4d;
+    border: 1px solid #fff7;
+    border-radius: 50%;
+    color: #f6f5e7;
+    backdrop-filter: blur(6px);
+  }
+  .journey-touch button.active {
+    background: #496f5d9e;
+  }
+  .touch-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+  }
+  .journey-touch button.touch-jump {
+    width: 66px;
+    height: 66px;
+    touch-action: none;
+    background: #e8f2ec55;
+  }
+  .journey-touch button span {
+    font-size: 8px;
+  }
+  .journey-discovery {
+    bottom: 27px;
+    left: 15px;
+    right: 15px;
+    width: auto;
+    padding: 22px;
+    max-height: 55%;
+    overflow: auto;
+  }
+  .journey-discovery h2 {
+    font-size: 21px;
+  }
+  .journey-discovery > p {
+    font-size: 11px;
+  }
+  .journey-pause h2 {
+    font-size: 22px;
+  }
+  .journey-pause p {
+    font-size: 11px;
+  }
+  .journey-toast {
+    font-size: 9px;
+    width: max-content;
+    max-width: 92%;
+    top: 60px;
+    padding: 11px 14px;
+  }
+  .journey-loading h2 {
+    font-size: 21px;
+  }
+  .journey-loading p {
+    font-size: 11px;
+  }
+}
+@media (pointer: coarse) and (min-width: 761px) {
+  .journey-touch {
+    position: absolute;
+    bottom: 100px;
+    left: 190px;
+    display: flex;
+    gap: 20px;
+  }
+  .touch-stick {
+    width: 90px;
+    height: 90px;
+    touch-action: none;
+    border: 1px solid #fff9;
+    border-radius: 50%;
+    background: #fff4;
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+  .touch-stick > svg {
+    position: absolute;
+    top: 8px;
+  }
+  .touch-stick i {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fffa;
+  }
+  .journey-touch button {
+    display: grid;
+    place-items: center;
+    color: #fff;
+  }
+  .journey-touch button span {
+    font-size: 10px;
+  }
+}
+.journey-source {
+  position: absolute;
+  bottom: 8px;
+  right: 18px;
+  display: flex;
+  gap: 12px;
+  font-size: 9px;
+  color: #324e45;
+  text-shadow: 0 1px 3px #fff;
+}
+.journey-source a {
+  color: inherit;
+}
+@media (max-width: 700px) {
+  .journey-source {
+    left: 12px;
+    right: 12px;
+    justify-content: center;
+    font-size: 8px;
+    bottom: 5px;
+  }
+  .journey-source > span {
+    display: none;
+  }
+}
+.journey-location {
+  padding: 16px 18px;
+  left: 20px;
+  background: linear-gradient(110deg, #f5f3e9eb, #f5f3e9a8);
+  border: 1px solid #fff7;
+  border-radius: 6px;
+  backdrop-filter: blur(12px);
+}
+.journey-title {
+  background: #f5f3e9d9;
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+@media (max-width: 700px) {
+  .journey-location {
+    left: 12px;
+    padding: 10px 12px;
+    max-width: calc(100% - 24px);
+  }
+}
+/* Ink-painted round minimap matching the map screen. */
+.journey-minimap {
+  background: linear-gradient(#f5ecd4f0, #ebdfc0f0);
+  border: 1px solid #5b4a35;
+  border-radius: 2px;
+  box-shadow:
+    0 8px 24px #3a2c1c30,
+    inset 0 0 0 3px #f5ecd4,
+    inset 0 0 0 4px #a24a3755;
+}
+.journey-minimap > div,
+.journey-minimap > span {
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 700;
+  color: #4b5a50;
+}
+.journey-minimap > div > b {
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 800;
+  font-size: 10px;
+  color: #a43d2c;
+}
+.journey-minimap > svg {
+  border-radius: 50%;
+  border: 1px solid #3a463f;
+  outline: 3px double #3a463f66;
+  outline-offset: 2px;
+}
+
+/* ===========================================================================
+   Game HUD: ink panels with gold trim in the manner of wuxia MMOs.
+   Scoped to .game-hud so the rules above remain the fallback.
+   =========================================================================== */
+.journey-mode .header {
+  display: none;
+}
+.journey-mode main.journey-page {
+  height: 100dvh !important;
+}
+.game-hud {
+  --ink: rgba(10, 16, 18, 0.62);
+  --ink-solid: #0e1517;
+  --gold: #c9a45c;
+  --gold-soft: rgba(201, 164, 92, 0.55);
+  --paper: #efe6cf;
+  --qi: #8fe3d2;
+  --seal: #a43d2c;
+  font-family: "Nanum Myeongjo", serif;
+  color: var(--paper);
+  background: #0e1517;
+}
+.game-hud .journey-vignette {
+  background:
+    radial-gradient(
+      ellipse at 50% 55%,
+      transparent 55%,
+      rgba(6, 10, 12, 0.55) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 10, 12, 0.35),
+      transparent 18%,
+      transparent 78%,
+      rgba(6, 10, 12, 0.45)
+    );
+}
+.game-hud .hud-panel,
+.game-hud .journey-quest,
+.game-hud .journey-location,
+.game-hud .journey-interact,
+.game-hud .hud-player .hud-bars,
+.game-hud .journey-controls > div {
+  background: linear-gradient(
+    180deg,
+    rgba(14, 22, 24, 0.78),
+    rgba(8, 12, 14, 0.62)
+  );
+  border: 1px solid var(--gold-soft);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 240, 200, 0.06),
+    inset 0 0 18px rgba(201, 164, 92, 0.08);
+  backdrop-filter: blur(6px);
+  border-radius: 3px;
+  color: var(--paper);
+}
+.game-hud kbd {
+  font-family: "Pretendard", sans-serif;
+  background: linear-gradient(#2a2416, #15120b);
+  border: 1px solid var(--gold-soft);
+  color: #f3dfa8;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 9px;
+}
+/* --- player medallion --- */
+.hud-player {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  z-index: 3;
+  pointer-events: none;
+}
+.hud-portrait {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  box-shadow:
+    0 0 0 3px rgba(10, 14, 16, 0.9),
+    0 0 0 4px var(--gold-soft),
+    0 6px 18px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+.hud-portrait svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.hud-portrait > span {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #f8e7b8;
+  background: radial-gradient(circle at 40% 35%, #b84a35, #6d1f14);
+  border: 1px solid var(--gold);
+}
+.hud-player .hud-bars {
+  margin-left: -16px;
+  padding: 9px 14px 9px 26px;
+  width: 248px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hud-bars strong {
+  font-size: 13px;
+  font-weight: 800;
+  color: #f6e9c6;
+  letter-spacing: 1px;
+}
+.hud-bars em {
+  font-style: normal;
+  font-size: 10px;
+  color: var(--gold);
+  margin-left: 6px;
+}
+.hud-bar {
+  position: relative;
+  height: 13px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(201, 164, 92, 0.4);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.hud-bar > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  transition: width 0.12s linear;
+}
+.hud-bar.qi > i {
+  background: linear-gradient(180deg, #b8fff0, #4fc2ad 55%, #2b8a7b);
+  box-shadow: 0 0 10px rgba(143, 227, 210, 0.7);
+}
+.hud-bar.qi.low > i {
+  background: linear-gradient(180deg, #ffb3a1, #d4523d 55%, #8f2d1f);
+  animation: hud-pulse 0.6s ease-in-out infinite alternate;
+}
+.hud-bar.exp {
+  height: 6px;
+}
+.hud-bar.exp > i {
+  background: linear-gradient(90deg, #8b6a2c, #f0cf7a);
+}
+.hud-bar > span {
+  position: relative;
+  display: block;
+  font-family: "Pretendard", sans-serif;
+  font-size: 8.5px;
+  line-height: 13px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+.hud-bar.exp > span {
+  position: absolute;
+  right: 0;
+  top: 7px;
+  font-size: 8px;
+  line-height: 1;
+  color: var(--gold);
+}
+@keyframes hud-pulse {
+  to {
+    opacity: 0.55;
+  }
+}
+/* --- back button and tools --- */
+.game-hud .journey-topbar {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.game-hud .journey-back {
+  position: absolute;
+  top: 116px;
+  left: 22px;
+  pointer-events: auto;
+  background: rgba(10, 16, 18, 0.6);
+  border: 1px solid var(--gold-soft);
+  color: var(--paper);
+  border-radius: 3px;
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 7px 11px;
+}
+.game-hud .journey-tools {
+  position: absolute;
+  top: 252px;
+  right: 22px;
+  display: flex;
+  gap: 8px;
+  pointer-events: auto;
+}
+.game-hud .journey-tools button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 40% 30%, #26343a, #0c1214);
+  border: 1px solid var(--gold);
+  color: #f3dfa8;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+}
+.game-hud .journey-tools button:hover {
+  color: #fff;
+  box-shadow: 0 0 12px rgba(201, 164, 92, 0.55);
+}
+/* --- minimap --- */
+.game-hud .journey-minimap {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  left: auto;
+  bottom: auto;
+  width: 200px;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  outline: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: none;
+}
+.game-hud .minimap-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  color: #f6e9c6;
+  text-shadow: 0 1px 6px #000;
+}
+.game-hud .minimap-title b {
+  font-family: "Nanum Brush Script", serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+.game-hud .minimap-title span {
+  font-size: 10px;
+  color: var(--gold);
+  font-weight: 800;
+}
+.minimap-ring {
+  position: relative;
+  width: 172px;
+  height: 172px;
+}
+.game-hud .minimap-ring svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  outline: 0;
+  box-shadow:
+    0 0 0 4px rgba(10, 14, 16, 0.92),
+    0 0 0 5px var(--gold-soft),
+    0 0 0 9px rgba(10, 14, 16, 0.55),
+    0 8px 22px rgba(0, 0, 0, 0.5),
+    inset 0 0 26px rgba(40, 30, 10, 0.55);
+}
+.minimap-ring .dir {
+  position: absolute;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  color: #f3dfa8;
+  text-shadow: 0 0 4px #000;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #0e1517;
+  border: 1px solid var(--gold-soft);
+}
+.minimap-ring .dir-0 {
+  top: -9px;
+  left: calc(50% - 9px);
+  color: #ff9f86;
+}
+.minimap-ring .dir-1 {
+  right: -9px;
+  top: calc(50% - 9px);
+}
+.minimap-ring .dir-2 {
+  bottom: -9px;
+  left: calc(50% - 9px);
+}
+.minimap-ring .dir-3 {
+  left: -9px;
+  top: calc(50% - 9px);
+}
+.game-hud .journey-minimap > span {
+  font-family: "Pretendard", sans-serif;
+  font-size: 8.5px;
+  color: #d9ccaa;
+  text-shadow: 0 1px 3px #000;
+  margin-top: 6px;
+}
+/* --- region select, quest log --- */
+.game-hud .journey-location {
+  position: absolute;
+  top: 300px;
+  right: 18px;
+  left: auto;
+  width: 210px;
+  padding: 8px 10px;
+}
+.game-hud .journey-location label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.game-hud .journey-location label > span {
+  font-size: 10px;
+  color: var(--gold);
+  font-weight: 800;
+  white-space: nowrap;
+}
+.game-hud .journey-location select {
+  flex: 1;
+  appearance: none;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--gold-soft);
+  color: var(--paper);
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 4px 18px 4px 6px;
+  border-radius: 2px;
+}
+.game-hud .journey-location select option {
+  color: #111;
+}
+.game-hud .journey-location label > svg {
+  position: absolute;
+  right: 6px;
+  color: var(--gold);
+  pointer-events: none;
+}
+.game-hud .journey-location > p {
+  margin: 6px 0 0;
+  font-size: 9px;
+  color: #b9ae92;
+}
+.game-hud .journey-quest {
+  position: absolute;
+  top: 366px;
+  right: 18px;
+  left: auto;
+  width: 210px;
+  padding: 10px 12px;
+  max-height: calc(100% - 520px);
+  overflow: hidden;
+}
+.game-hud .quest-heading span {
+  color: #f3dfa8;
+  font-weight: 800;
+  font-size: 12px;
+}
+.game-hud .quest-heading b {
+  color: var(--gold);
+}
+.game-hud .quest-heading i {
+  color: #8f866f;
+}
+.game-hud .quest-progress {
+  background: rgba(0, 0, 0, 0.5);
+}
+.game-hud .quest-progress span {
+  background: linear-gradient(90deg, #8b6a2c, #f0cf7a);
+}
+.game-hud .quest-stop strong {
+  color: var(--paper);
+  font-weight: 700;
+}
+.game-hud .quest-stop small {
+  color: #a59c84;
+}
+.game-hud .quest-stop > span:first-child {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: var(--gold-soft);
+  color: var(--gold);
+}
+.game-hud .quest-stop.next strong {
+  color: #ffe3a0;
+}
+.game-hud .quest-stop.discovered > span:first-child {
+  background: #3b5a4a;
+  color: #e8ffe0;
+}
+.game-hud .quest-distance {
+  color: var(--qi);
+}
+/* --- region title card --- */
+.hud-region {
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  animation: hud-region 5.5s ease forwards;
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(0, 0, 0, 0.4);
+}
+.hud-region small {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 8px;
+  color: var(--gold);
+}
+.hud-region strong {
+  font-family: "Nanum Brush Script", serif;
+  font-weight: 400;
+  font-size: 92px;
+  line-height: 1.05;
+  color: #fbf3df;
+  letter-spacing: 6px;
+}
+.hud-region strong::after {
+  content: "遊";
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #fbe7d7;
+  background: var(--seal);
+  padding: 4px 5px;
+  margin-left: 10px;
+  vertical-align: 52px;
+  border-radius: 2px;
+  letter-spacing: 0;
+  box-shadow: inset 0 0 0 2px #fbe7d755;
+}
+.hud-region span {
+  font-size: 14px;
+  color: #e8dcbc;
+  letter-spacing: 3px;
+  padding-top: 4px;
+  border-top: 1px solid var(--gold-soft);
+}
+@keyframes hud-region {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate(-50%, 12px);
+  }
+  14%,
+  70% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translate(-50%, -8px);
+  }
+}
+/* --- name plate and technique callouts --- */
+.hud-nameplate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 2;
+  text-shadow:
+    0 1px 3px #000,
+    0 0 8px rgba(0, 0, 0, 0.6);
+  will-change: transform;
+}
+.hud-nameplate small {
+  font-size: 9px;
+  color: var(--qi);
+  font-weight: 700;
+}
+.hud-nameplate b {
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff4d6;
+  letter-spacing: 1px;
+}
+.hud-callout {
+  position: absolute;
+  bottom: 100%;
+  white-space: nowrap;
+  font-family: "Nanum Brush Script", serif;
+  font-size: 46px;
+  color: #effffb;
+  text-shadow:
+    0 0 10px rgba(143, 227, 210, 0.95),
+    0 0 26px rgba(143, 227, 210, 0.6),
+    0 2px 4px #000;
+  animation: hud-callout 1.4s ease-out forwards;
+}
+@keyframes hud-callout {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(1.6);
+    filter: blur(6px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-26px) scale(0.95);
+  }
+}
+/* --- chat-style log --- */
+.hud-log {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  width: 340px;
+  padding: 10px 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(8, 12, 14, 0.6), rgba(8, 12, 14, 0));
+  border-left: 2px solid var(--gold-soft);
+}
+.hud-log p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #e9e0c8;
+  text-shadow: 0 1px 2px #000;
+  animation: hud-log-in 0.4s ease;
+}
+.hud-log p:not(:nth-last-child(-n + 3)) {
+  opacity: 0.55;
+}
+.hud-log b {
+  color: var(--gold);
+  font-weight: 800;
+}
+@keyframes hud-log-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+/* --- skill hotbar --- */
+.hud-skills {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  padding: 10px 16px 8px;
+  background:
+    linear-gradient(180deg, rgba(14, 22, 24, 0), rgba(8, 12, 14, 0.7) 30%),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(201, 164, 92, 0.18),
+      transparent 70%
+    );
+  border-bottom: 1px solid var(--gold-soft);
+  z-index: 3;
+}
+.hud-skills .skill {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: radial-gradient(circle at 50% 35%, #233138, #0b1113 75%);
+  border: 1px solid var(--gold);
+  box-shadow:
+    inset 0 0 0 2px rgba(10, 14, 16, 0.9),
+    inset 0 0 0 3px rgba(201, 164, 92, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.5);
+  color: var(--qi);
+  cursor: pointer;
+  touch-action: none;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.2s ease;
+}
+.hud-skills .skill svg {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 0 4px rgba(143, 227, 210, 0.7));
+}
+.hud-skills .skill:hover {
+  transform: translateY(-2px);
+}
+.hud-skills .skill.active {
+  box-shadow:
+    inset 0 0 0 2px rgba(10, 14, 16, 0.9),
+    0 0 18px rgba(143, 227, 210, 0.85);
+  color: #fff;
+}
+.hud-skills .skill.lacking {
+  filter: grayscale(1) brightness(0.6);
+}
+.hud-skills .skill.passive {
+  cursor: default;
+  color: #f0cf7a;
+  border-style: dashed;
+}
+.hud-skills .skill.passive svg {
+  filter: drop-shadow(0 0 4px rgba(240, 207, 122, 0.6));
+}
+.hud-skills .skill .cooldown {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  pointer-events: none;
+}
+.hud-skills .skill kbd {
+  position: absolute;
+  top: -7px;
+  left: -6px;
+  font-size: 8px;
+}
+.hud-skills .skill > span {
+  position: absolute;
+  bottom: -15px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #f3e4be;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px #000;
+}
+/* --- interaction prompt --- */
+.game-hud .journey-interact {
+  bottom: 118px;
+  width: 300px;
+  padding: 9px 12px;
+  gap: 10px;
+}
+.game-hud .journey-interact small {
+  color: #b9ae92;
+}
+.game-hud .journey-interact strong {
+  color: #fff1cc;
+  font-weight: 800;
+}
+.game-hud .interact-symbol {
+  background: radial-gradient(circle, #3d3420, #14110a);
+  color: #f0cf7a;
+  border: 1px solid var(--gold-soft);
+}
+.game-hud .journey-interact button {
+  background: linear-gradient(#3a3020, #1a150c);
+  border: 1px solid var(--gold);
+  color: #f3dfa8;
+}
+.game-hud .journey-interact.available {
+  box-shadow:
+    0 0 0 1px var(--gold),
+    0 0 22px rgba(240, 207, 122, 0.45);
+}
+/* --- controls, source, toast, overlays --- */
+.game-hud .journey-controls {
+  right: 18px;
+  bottom: 18px;
+  left: auto;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+.game-hud .journey-controls > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 7px 10px;
+  font-size: 10px;
+  color: #d9ccaa;
+}
+.game-hud .journey-controls > button {
+  background: rgba(10, 16, 18, 0.6);
+  border: 1px solid var(--gold-soft);
+  color: var(--paper);
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 700;
+}
+.game-hud .journey-source {
+  right: 18px;
+  bottom: 2px;
+  left: auto;
+  opacity: 0.6;
+}
+.game-hud .journey-source a {
+  color: #b9ae92;
+  font-size: 8px;
+}
+.game-hud .journey-toast {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(10, 14, 16, 0.85),
+    transparent
+  );
+  border: 0;
+  border-top: 1px solid var(--gold-soft);
+  border-bottom: 1px solid var(--gold-soft);
+  color: #fff1cc;
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 700;
+  top: 30%;
+  padding: 10px 60px;
+  border-radius: 0;
+}
+.game-hud .journey-pause,
+.game-hud .journey-loading {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(14, 22, 24, 0.82),
+    rgba(4, 6, 8, 0.92)
+  );
+  color: var(--paper);
+}
+.game-hud .journey-pause > div {
+  background: linear-gradient(180deg, #f3ead2, #e6d9b6);
+  color: #26302b;
+  border: 1px solid #5b4a35;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 4px #f3ead2,
+    inset 0 0 0 5px rgba(164, 61, 44, 0.5);
+  border-radius: 2px;
+  max-width: 520px;
+}
+.game-hud .journey-pause > div > span {
+  color: var(--seal);
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+.game-hud .journey-pause h2 {
+  font-family: "Nanum Brush Script", serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #1f2824;
+}
+.manual {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  margin: 12px 0;
+  text-align: left;
+  font-size: 12px;
+}
+.manual dt {
+  font-weight: 800;
+  color: #6d1f14;
+  white-space: nowrap;
+}
+.manual dd {
+  margin: 0;
+  color: #3a463f;
+}
+.manual kbd {
+  font-size: 9px;
+  margin-right: 4px;
+}
+.game-hud .journey-pause button {
+  background: linear-gradient(#2e3a34, #1f2824);
+  color: #f3e7c8;
+  border: 1px solid var(--gold);
+}
+.game-hud .journey-loading h2 {
+  font-family: "Nanum Brush Script", serif;
+  font-weight: 400;
+  font-size: 40px;
+  color: #fbf3df;
+}
+.game-hud .journey-loading p {
+  color: #b9ae92;
+}
+.game-hud .journey-loading svg {
+  color: var(--gold);
+}
+.game-hud .journey-discovery {
+  background: linear-gradient(180deg, #f3ead2f5, #e6d9b6f5);
+  color: #26302b;
+  border: 1px solid #5b4a35;
+  border-radius: 2px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 4px #f3ead2,
+    inset 0 0 0 5px rgba(164, 61, 44, 0.45);
+}
+.game-hud .journey-discovery h2 {
+  font-family: "Nanum Brush Script", serif;
+  font-weight: 400;
+  font-size: 40px;
+}
+/* --- touch layout --- */
+@media (max-width: 760px), (pointer: coarse) {
+  .game-hud .hud-log,
+  .game-hud .journey-controls > div {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .hud-player {
+    top: 10px;
+    left: 10px;
+  }
+  .hud-portrait {
+    width: 52px;
+    height: 52px;
+  }
+  .hud-portrait > span {
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
+  }
+  .hud-player .hud-bars {
+    width: 150px;
+    margin-left: -10px;
+    padding: 6px 8px 6px 16px;
+    gap: 4px;
+  }
+  .hud-bars strong {
+    font-size: 10px;
+  }
+  .hud-bars em {
+    display: none;
+  }
+  .hud-bar {
+    height: 10px;
+  }
+  .hud-bar > span {
+    font-size: 7px;
+    line-height: 10px;
+  }
+  .game-hud .journey-back {
+    top: 74px;
+    left: 10px;
+    font-size: 9px;
+    padding: 5px 8px;
+  }
+  .game-hud .journey-minimap {
+    top: 8px;
+    right: 8px;
+    width: 116px;
+  }
+  .game-hud .minimap-title b {
+    font-size: 15px;
+  }
+  .minimap-ring {
+    width: 96px;
+    height: 96px;
+  }
+  .minimap-ring .dir {
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
+  }
+  .minimap-ring .dir-0 {
+    top: -7px;
+    left: calc(50% - 7px);
+  }
+  .minimap-ring .dir-1 {
+    right: -7px;
+    top: calc(50% - 7px);
+  }
+  .minimap-ring .dir-2 {
+    bottom: -7px;
+    left: calc(50% - 7px);
+  }
+  .minimap-ring .dir-3 {
+    left: -7px;
+    top: calc(50% - 7px);
+  }
+  .game-hud .journey-minimap > span {
+    display: none;
+  }
+  .game-hud .journey-tools {
+    top: 146px;
+    right: 8px;
+    gap: 5px;
+  }
+  .game-hud .journey-tools button {
+    width: 30px;
+    height: 30px;
+    display: grid !important;
+  }
+  .game-hud .journey-location {
+    top: 186px;
+    right: 8px;
+    width: 140px;
+    padding: 5px 6px;
+  }
+  .game-hud .journey-location > p,
+  .game-hud .journey-location label > span {
+    display: none;
+  }
+  .game-hud .journey-quest {
+    display: none;
+  }
+  .hud-region strong {
+    font-size: 54px;
+  }
+  .hud-region strong::after {
+    vertical-align: 26px;
+    font-size: 12px;
+  }
+  .hud-skills {
+    left: auto;
+    right: 12px;
+    bottom: 236px;
+    transform: none;
+    flex-direction: column;
+    gap: 20px;
+    padding: 6px;
+    background: none;
+    border: 0;
+  }
+  .hud-skills .skill {
+    width: 46px;
+    height: 46px;
+  }
+  .hud-skills .skill:first-child,
+  .hud-skills .skill.passive {
+    display: none;
+  }
+  .hud-skills .skill svg {
+    width: 22px;
+    height: 22px;
+  }
+  .hud-skills .skill kbd {
+    display: none;
+  }
+  .hud-skills .skill > span {
+    bottom: -14px;
+    font-size: 9px;
+  }
+  .game-hud .journey-interact {
+    bottom: 196px;
+    width: calc(100% - 140px);
+    left: 12px;
+    transform: none;
+  }
+  .hud-callout {
+    font-size: 32px;
+  }
+}
+.hud-region strong,
+.hud-region span {
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .hud-region {
+    top: 24%;
+  }
+  .hud-region strong {
+    font-size: 40px;
+    letter-spacing: 2px;
+  }
+  .hud-region span {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .game-hud .journey-interact {
+    bottom: 236px;
+  }
+  .game-hud .minimap-title span {
+    display: none;
+  }
+}
