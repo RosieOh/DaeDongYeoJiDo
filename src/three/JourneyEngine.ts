@@ -26,6 +26,7 @@ import {
   presets,
 } from "./sky";
 import type { TimeOfDay } from "./sky";
+import { loadProbe, probeIntensity, probeRotation } from "./probes";
 export type JourneyState = {
   x: number;
   z: number;
@@ -63,6 +64,9 @@ export class JourneyEngine {
   private skyMaterial = createSkyMaterial();
   private sky = createSkyDome(this.skyMaterial);
   private environment: THREE.WebGLRenderTarget | null = null;
+  private probeRequest = 0;
+  private useProbe = true;
+  private disposed = false;
   private timeOfDay: TimeOfDay = "day";
   private atmosphere: AtmosphereState = {
     ...presets.day,
@@ -336,6 +340,17 @@ export class JourneyEngine {
         setPieces: () => this.world.setPieces,
         scene: this.scene,
         renderer: this.renderer,
+        /** Compare the photographed probe with the sky-only bake. */
+        probe: (on: boolean, rotation?: number) => {
+          this.useProbe = on;
+          this.setTimeOfDay(this.timeOfDay);
+          if (rotation !== undefined)
+            setTimeout(
+              () => this.scene.environmentRotation.set(0, rotation, 0),
+              300,
+            );
+        },
+        sun: (intensity: number) => (this.sun.intensity = intensity),
       };
   }
   private clearInput() {
@@ -408,7 +423,29 @@ export class JourneyEngine {
       this.environment ?? undefined,
     );
     this.scene.environment = this.environment.texture;
+    this.scene.environmentRotation.set(0, 0, 0);
     this.scene.environmentIntensity = p.envIntensity;
+    // Swap the sky-only bake for the photographed probe once it arrives.
+    const request = ++this.probeRequest;
+    if (this.useProbe)
+      loadProbe(mode)
+        .then((texture) => {
+          if (request !== this.probeRequest || this.disposed) return;
+          const pmrem = new THREE.PMREMGenerator(this.renderer);
+          const target = pmrem.fromEquirectangular(texture);
+          pmrem.dispose();
+          this.environment?.dispose();
+          this.environment = target;
+          this.scene.environment = target.texture;
+          this.scene.environmentRotation.set(
+            0,
+            probeRotation(mode, p.sunDir),
+            0,
+          );
+          this.scene.environmentIntensity =
+            p.envIntensity * probeIntensity(mode);
+        })
+        .catch(() => {});
   }
   reset() {
     this.position = { x: this.world.spawn.x, z: this.world.spawn.z };
@@ -764,6 +801,7 @@ export class JourneyEngine {
     return this.canvas.toDataURL("image/png");
   }
   dispose() {
+    this.disposed = true;
     this.renderer.setAnimationLoop(null);
     this.resizeObserver.disconnect();
     this.cleanup.forEach((fn) => fn());

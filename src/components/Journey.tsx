@@ -29,6 +29,7 @@ import { validateGeoScene, toCoordinates } from "../three/geo";
 import type { GeoSceneData } from "../three/geo";
 import { loadSurfaces } from "../three/textures";
 import { loadHero } from "../three/avatar";
+import { loadProbe } from "../three/probes";
 import type { TimeOfDay } from "../three/sky";
 import "./journey.css";
 import { asset } from "../asset";
@@ -280,12 +281,13 @@ export default function Journey({
     Promise.all([
       fetch(asset(`geo/${place.id}.json`), { signal: controller.signal }),
       loadSurfaces(),
+      loadProbe("day").catch(() => null),
       loadHero().catch((e) => {
         console.warn("Hero model unavailable, using the procedural figure", e);
         return null;
       }),
     ])
-      .then(async ([response, surfaces, hero]) => {
+      .then(async ([response, surfaces, , hero]) => {
         if (!response.ok) throw new Error(`Scene data: ${response.status}`);
         const data: unknown = await response.json();
         if (controller.signal.aborted) return;
