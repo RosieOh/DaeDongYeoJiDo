@@ -1,0 +1,20 @@
+{
+  "license": "CC0 1.0 Universal (public domain)",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "provider": "ambientCG",
+  "providerUrl": "https://ambientcg.com",
+  "note": "1K JPG sets resized to 512 px. Colour maps were multiplied with 60% of the ambient-occlusion map; NormalGL maps are used as tangent-space normals.",
+  "textures": {
+    "grass": "https://ambientcg.com/view?id=Grass004",
+    "dirt": "https://ambientcg.com/view?id=Ground103",
+    "rock": "https://ambientcg.com/view?id=Rock022",
+    "sand": "https://ambientcg.com/view?id=Ground080",
+    "path": "https://ambientcg.com/view?id=Ground081",
+    "paving": "https://ambientcg.com/view?id=PavingStones128",
+    "asphalt": "https://ambientcg.com/view?id=Gravel043",
+    "plaster": "https://ambientcg.com/view?id=Plaster001",
+    "wood": "https://ambientcg.com/view?id=Wood049",
+    "bark": "https://ambientcg.com/view?id=Bark014",
+    "leaves": "https://ambientcg.com/view?id=ScatteredLeaves009"
+  }
+}
