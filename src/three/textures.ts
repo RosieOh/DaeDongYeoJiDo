@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { asset } from "../asset";
 
 /** CC0 surfaces from ambientCG, resized to 512 px (see public/textures/CREDITS.json). */
@@ -89,16 +90,83 @@ function single(canvas: HTMLCanvasElement, srgb: boolean) {
   return texture;
 }
 
+/** A photoscanned rock: unit horizontal radius, resting on y = 0. */
+export type RockShape = {
+  name: string;
+  geometry: THREE.BufferGeometry;
+  material: THREE.MeshStandardMaterial;
+};
 export type SurfaceLibrary = {
   terrainColor: THREE.DataArrayTexture;
   terrainNormal: THREE.DataArrayTexture;
   maps: Record<SurfaceName, { map: THREE.Texture; normal: THREE.Texture }>;
+  /** CC0 Poly Haven rocks; empty when they could not be loaded. */
+  rocks: RockShape[];
 };
+
+/** CC0 Poly Haven scans, simplified to 1.5–3k triangles with gltfpack. */
+const ROCKS = ["rock_09", "rock_07", "boulder_01", "rock_face_01"];
+async function loadRocks(): Promise<RockShape[]> {
+  const loader = new GLTFLoader();
+  const loaded = await Promise.all(
+    ROCKS.map((name) =>
+      loader
+        .loadAsync(asset(`models/rocks/${name}.glb`))
+        .then((gltf) => {
+          let mesh: THREE.Mesh | undefined;
+          gltf.scene.updateMatrixWorld(true);
+          gltf.scene.traverse((o) => {
+            if (!mesh && o instanceof THREE.Mesh) mesh = o;
+          });
+          if (!mesh) return null;
+          // Dequantize, bake the node transform, then normalise the size.
+          const geometry = new THREE.BufferGeometry();
+          for (const [key, a] of Object.entries(mesh.geometry.attributes)) {
+            // Scan vertex colours only darken the photographed albedo.
+            if (key === "color") continue;
+            const data = new Float32Array(a.count * a.itemSize);
+            for (let i = 0; i < a.count; i++)
+              for (let c = 0; c < a.itemSize; c++)
+                data[i * a.itemSize + c] = a.getComponent(i, c);
+            geometry.setAttribute(
+              key,
+              new THREE.BufferAttribute(data, a.itemSize),
+            );
+          }
+          geometry.setIndex(mesh.geometry.index);
+          geometry.applyMatrix4(mesh.matrixWorld);
+          geometry.computeBoundingBox();
+          const box = geometry.boundingBox!;
+          const radius =
+            Math.max(box.max.x - box.min.x, box.max.z - box.min.z) / 2;
+          geometry.translate(
+            -(box.min.x + box.max.x) / 2,
+            -box.min.y,
+            -(box.min.z + box.max.z) / 2,
+          );
+          geometry.scale(1 / radius, 1 / radius, 1 / radius);
+          geometry.computeBoundingSphere();
+          const material = mesh.material as THREE.MeshStandardMaterial;
+          // The packed ARM map's red channel is occlusion; scans read as
+          // wet stone with their own roughness, so keep the rock matte.
+          material.aoMap = material.roughnessMap;
+          material.roughnessMap = material.metalnessMap = null;
+          material.roughness = 0.9;
+          material.metalness = 0;
+          material.vertexColors = false;
+          return { name, geometry, material };
+        })
+        .catch(() => null),
+    ),
+  );
+  return loaded.filter((r): r is RockShape => !!r);
+}
 let library: Promise<SurfaceLibrary> | null = null;
 /** Loads once per page; textures survive renderer disposal and re-upload on demand. */
 export function loadSurfaces() {
   library ??= (async () => {
     const names = [...new Set([...terrainLayers, ...singles])];
+    const rocks = loadRocks();
     const color = await Promise.all(names.map((n) => loadPixels(n, false)));
     const normal = await Promise.all(names.map((n) => loadPixels(n, true)));
     const pick = (list: HTMLCanvasElement[], n: string) =>
@@ -119,6 +187,7 @@ export function loadSurfaces() {
         false,
       ),
       maps,
+      rocks: await rocks,
     };
   })();
   return library;

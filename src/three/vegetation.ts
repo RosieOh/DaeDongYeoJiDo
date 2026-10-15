@@ -1149,40 +1149,56 @@ export function scatterRocks(
 ) {
   const random = rng(17),
     e = field.data.terrain.extent;
-  const shapes: THREE.BufferGeometry[] = [];
-  for (let k = 0; k < 4; k++) {
-    const g = new THREE.IcosahedronGeometry(1, 2);
-    const p = g.attributes.position;
-    for (let i = 0; i < p.count; i++) {
-      const v = V(p.getX(i), p.getY(i), p.getZ(i));
-      const n =
-        1 +
-        Math.sin(v.x * 3.1 + k) * 0.12 +
-        Math.sin(v.y * 4.3 + k * 2) * 0.1 +
-        (random() - 0.5) * 0.1;
-      v.multiplyScalar(n);
-      v.y *= 0.62;
-      if (v.y < -0.15) v.y = -0.15 - (v.y + 0.15) * 0.2;
-      p.setXYZ(i, v.x, v.y, v.z);
+  // Photoscanned rocks when they loaded; otherwise lumpy icosahedra.
+  const shapes: {
+    geometry: THREE.BufferGeometry;
+    material: THREE.Material;
+    outcrop: boolean;
+  }[] = surfaces.rocks.map((r) => ({
+    geometry: r.geometry,
+    material: r.material,
+    outcrop: r.name.includes("face") || r.name.includes("boulder"),
+  }));
+  if (!shapes.length) {
+    const material = new THREE.MeshStandardMaterial({
+      map: surfaces.maps.rock.map,
+      normalMap: surfaces.maps.rock.normal,
+      color: "#b9b4aa",
+      roughness: 0.9,
+    });
+    for (let k = 0; k < 4; k++) {
+      const g = new THREE.IcosahedronGeometry(1, 2);
+      const p = g.attributes.position;
+      for (let i = 0; i < p.count; i++) {
+        const v = V(p.getX(i), p.getY(i), p.getZ(i));
+        const n =
+          1 +
+          Math.sin(v.x * 3.1 + k) * 0.12 +
+          Math.sin(v.y * 4.3 + k * 2) * 0.1 +
+          (random() - 0.5) * 0.1;
+        v.multiplyScalar(n);
+        v.y *= 0.62;
+        if (v.y < -0.15) v.y = -0.15 - (v.y + 0.15) * 0.2;
+        p.setXYZ(i, v.x, v.y, v.z);
+      }
+      g.computeVertexNormals();
+      const uv = g.attributes.uv;
+      for (let i = 0; i < p.count; i++)
+        uv.setXY(i, p.getX(i) * 0.6 + p.getZ(i) * 0.3, p.getY(i) * 0.6);
+      shapes.push({ geometry: g, material, outcrop: k > 1 });
     }
-    g.computeVertexNormals();
-    const uv = g.attributes.uv;
-    for (let i = 0; i < p.count; i++)
-      uv.setXY(i, p.getX(i) * 0.6 + p.getZ(i) * 0.3, p.getY(i) * 0.6);
-    shapes.push(g);
   }
-  const material = new THREE.MeshStandardMaterial({
-    map: surfaces.maps.rock.map,
-    normalMap: surfaces.maps.rock.normal,
-    color: "#b9b4aa",
-    roughness: 0.9,
-  });
   const group = new THREE.Group(),
     n = new THREE.Vector3(),
     m = new THREE.Matrix4(),
     q = new THREE.Quaternion();
   const per: THREE.Matrix4[][] = shapes.map(() => []);
-  for (let i = 0; i < 2600 && per.flat().length < 420 * rocky + 60; i++) {
+  const clear = (x: number, z: number, margin: number) =>
+    masks.sample("road", x, z) <= 0.05 * margin &&
+    masks.sample("building", x, z) <= 0.02 * margin &&
+    masks.sample("water", x, z) <= 0.3;
+  let count = 0;
+  for (let i = 0; i < 2600 && count < 420 * rocky + 60; i++) {
     const x = (random() * 2 - 1) * (e - 10),
       z = (random() * 2 - 1) * (e - 10);
     if (Math.hypot(x, z) > 520) continue;
@@ -1192,12 +1208,7 @@ export function scatterRocks(
       (1 - n.y) * 2.5 * rocky +
       masks.sample("forest", x, z) * 0.04;
     if (random() > chance) continue;
-    if (
-      masks.sample("road", x, z) > 0.05 ||
-      masks.sample("building", x, z) > 0.02 ||
-      masks.sample("water", x, z) > 0.3
-    )
-      continue;
+    if (!clear(x, z, 1)) continue;
     const s = (0.35 + Math.pow(random(), 3) * 2.6) * (0.8 + rocky * 0.6);
     q.setFromUnitVectors(UP, n.clone().lerp(UP, 0.5).normalize()).multiply(
       new THREE.Quaternion().setFromAxisAngle(UP, random() * 6.28),
@@ -1208,11 +1219,42 @@ export function scatterRocks(
       V(s, s * (0.7 + random() * 0.6), s * (0.8 + random() * 0.4)),
     );
     per[Math.floor(random() * shapes.length)].push(m.clone());
+    count++;
   }
-  shapes.forEach((g, k) => {
+  // 암벽: big weathered outcrops breaking through steep slopes.
+  const outcrops = shapes.flatMap((s, k) => (s.outcrop ? [k] : []));
+  for (let i = 0, placed = 0; i < 4000 && placed < 70 * rocky + 4; i++) {
+    const x = (random() * 2 - 1) * (e - 20),
+      z = (random() * 2 - 1) * (e - 20);
+    const d = Math.hypot(x, z);
+    if (d < 40 || d > 520) continue;
+    field.normalAt(x, z, n);
+    if (n.y > 0.86 || !clear(x, z, 0.2)) continue;
+    const s = 3 + random() * 7 * (0.6 + rocky);
+    // Lean with the slope and bury the base so the rock reads as bedrock.
+    q.setFromUnitVectors(UP, n.clone().lerp(UP, 0.35).normalize()).multiply(
+      new THREE.Quaternion().setFromAxisAngle(
+        UP,
+        Math.atan2(n.x, n.z) + (random() - 0.5),
+      ),
+    );
+    m.compose(
+      V(x, field.groundAt(x, z) - s * 0.3, z),
+      q,
+      V(s, s * (0.8 + random() * 0.7), s),
+    );
+    per[outcrops[Math.floor(random() * outcrops.length)]].push(m.clone());
+    placed++;
+  }
+  shapes.forEach((shape, k) => {
     if (!per[k].length) return;
-    const mesh = new THREE.InstancedMesh(g, material, per[k].length);
+    const mesh = new THREE.InstancedMesh(
+      shape.geometry,
+      shape.material,
+      per[k].length,
+    );
     per[k].forEach((mat, i) => mesh.setMatrixAt(i, mat));
+    mesh.computeBoundingSphere();
     mesh.castShadow = mesh.receiveShadow = true;
     group.add(mesh);
   });
