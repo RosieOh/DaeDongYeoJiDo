@@ -2,6 +2,9 @@ import * as THREE from "three";
 import type { Place } from "../data";
 import { nearestStop } from "./world";
 import { createTraveler } from "./character";
+import type { Traveler } from "./character";
+import { createHero } from "./avatar";
+import type { HeroAssets } from "./avatar";
 import type { SurfaceLibrary } from "./textures";
 import { buildGeoWorld } from "./GeoWorld";
 import { pointInPolygon } from "./geo";
@@ -69,7 +72,7 @@ export class JourneyEngine {
   };
   private bufferSize = new THREE.Vector2();
   readonly world: ReturnType<typeof buildGeoWorld>;
-  readonly traveler = createTraveler(this.quality.level === "high" ? 6 : 2);
+  readonly traveler: Traveler;
   readonly motion: Motion;
   private fx = new Effects(this.quality.level === "high");
   private eyeY = 0;
@@ -116,11 +119,15 @@ export class JourneyEngine {
     place: Place,
     data: GeoSceneData,
     surfaces: SurfaceLibrary,
+    hero: HeroAssets | null,
     onState: (state: JourneyState) => void,
     onInteract: (stop: Stop) => void,
   ) {
     this.onState = onState;
     this.onInteract = onInteract;
+    // The rigged hero when its model loaded, the procedural figure otherwise.
+    const ghosts = this.quality.level === "high" ? 6 : 2;
+    this.traveler = hero ? createHero(hero, ghosts) : createTraveler(ghosts);
     this.renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: false,

@@ -2,7 +2,7 @@ import * as THREE from "three";
 import type { MoveMode } from "./motion";
 import { shared } from "./quality";
 
-type Capsule = { a: THREE.Vector3; b: THREE.Vector3; r: number };
+export type Capsule = { a: THREE.Vector3; b: THREE.Vector3; r: number };
 export type AirState = {
   grounded: boolean;
   vy: number;
@@ -20,7 +20,7 @@ export type AirState = {
 };
 
 /** Soft sky-coloured rim light so the figure reads against busy scenery. */
-function rim<T extends THREE.MeshStandardMaterial>(
+export function rim<T extends THREE.MeshStandardMaterial>(
   material: T,
   strength = 0.35,
 ) {
@@ -41,9 +41,14 @@ totalEmissiveRadiance += mix(vec3(0.75, 0.85, 1.0), uSunColor, 0.5) * rimLight *
   material.customProgramCacheKey = () => `rim-${strength}`;
   return material;
 }
-const std = (color: string, o: THREE.MeshStandardMaterialParameters = {}) =>
-  rim(new THREE.MeshStandardMaterial({ color, roughness: 0.75, ...o }));
-const silk = (color: string, o: THREE.MeshPhysicalMaterialParameters = {}) =>
+export const std = (
+  color: string,
+  o: THREE.MeshStandardMaterialParameters = {},
+) => rim(new THREE.MeshStandardMaterial({ color, roughness: 0.75, ...o }));
+export const silk = (
+  color: string,
+  o: THREE.MeshPhysicalMaterialParameters = {},
+) =>
   rim(
     new THREE.MeshPhysicalMaterial({
       color,
@@ -91,7 +96,7 @@ function pushOut(p: THREE.Vector3, colliders: Capsule[], pad: number) {
 }
 
 /** Hair, ribbons and tassels: a verlet chain drawn as two crossed tapered strips. */
-class Strand {
+export class Strand {
   readonly mesh: THREE.Mesh;
   private points: THREE.Vector3[];
   private previous: THREE.Vector3[];
@@ -192,7 +197,7 @@ class Strand {
 }
 
 /** A cloth panel pinned along its top edge (robe tails, sleeve flaps). */
-class Cloth {
+export class Cloth {
   readonly mesh: THREE.Mesh;
   private points: THREE.Vector3[] = [];
   private previous: THREE.Vector3[] = [];
@@ -453,7 +458,7 @@ function faceTexture() {
 }
 
 /** Silk with a tonal cloud jacquard; the hem carries a gold-on-indigo band. */
-function silkTexture(hem: boolean) {
+export function silkTexture(hem: boolean) {
   return canvas(256, 512, (c) => {
     c.fillStyle = "#f7f4ee";
     c.fillRect(0, 0, 256, 512);
@@ -1307,3 +1312,5 @@ export function createTraveler(ghostCount = 6) {
     },
   };
 }
+
+export type Traveler = ReturnType<typeof createTraveler>;
