@@ -1,0 +1,27 @@
+{
+  "license": "CC0 1.0 Universal (public domain)",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "hero.glb": {
+    "title": "Base_Male (VRoid Studio sample avatar)",
+    "author": "VRoid Project (pixiv)",
+    "source": "https://opengameart.org/content/vroid-studio-cc0-models",
+    "note": "Repacked by scripts/pack-avatar.py: textures resized to 1024 px, the school uniform repainted as a white silk robe with indigo trim, hair darkened, irises recoloured. The VRM humanoid map is kept."
+  },
+  "moves.glb": {
+    "title": "Universal Animation Library (Standard)",
+    "author": "Quaternius",
+    "source": "https://quaternius.com/packs/universalanimationlibrary.html",
+    "note": "Skeleton and the clips the journey uses only (A_TPose, Idle, Walk, Jog, Sprint, Jump start/loop/land, Roll); retargeted onto the VRM skeleton at load. Licence text: LICENSE-moves.txt."
+  },
+  "rocks": {
+    "author": "Poly Haven (Jenelle van Heerden, Rico Cilliers, Dario Barresi)",
+    "source": "https://polyhaven.com/models/rocks",
+    "assets": {
+      "rock_07": "https://polyhaven.com/a/rock_07",
+      "rock_09": "https://polyhaven.com/a/rock_09",
+      "boulder_01": "https://polyhaven.com/a/boulder_01",
+      "rock_face_01": "https://polyhaven.com/a/rock_face_01"
+    },
+    "note": "1K glTF sets with textures resized to 512 px, simplified to 1.5–3k triangles with gltfpack (-si, -se 0.05)."
+  }
+}

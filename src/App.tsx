@@ -718,10 +718,31 @@ function App() {
               <a href="https://ambientcg.com" target="_blank" rel="noreferrer">
                 ambientCG
               </a>{" "}
-              (CC0 질감) · 나눔명조·나눔손글씨 붓 (OFL)
+              (CC0 질감) ·{" "}
+              <a
+                href="https://opengameart.org/content/vroid-studio-cc0-models"
+                target="_blank"
+                rel="noreferrer"
+              >
+                VRoid
+              </a>{" "}
+              ·{" "}
+              <a
+                href="https://quaternius.com/packs/universalanimationlibrary.html"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Quaternius
+              </a>{" "}
+              (CC0 인물·동작) ·{" "}
+              <a href="https://polyhaven.com" target="_blank" rel="noreferrer">
+                Poly Haven
+              </a>{" "}
+              (CC0 바위·HDRI) · 나눔명조·나눔손글씨 붓 (OFL)
               <br />
-              로고, 풍경 일러스트와 여행 공간의 전통 건축·나무·인물 3D 모델은
-              대동여지도를 위해 직접 제작했습니다.
+              로고, 풍경 일러스트와 여행 공간의 전통 건축·나무 3D 모델은
+              대동여지도를 위해 직접 제작했고, 주인공 인물은 CC0 모델을 협객
+              차림으로 다시 꾸몄습니다.
               <br />
               현재 12곳을 담은 첫 번째 여행지도입니다.
             </p>

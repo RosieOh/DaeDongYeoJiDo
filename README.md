@@ -2,7 +2,7 @@
 
 대한민국의 관광지를 실제 좌표와 입체 지형으로 탐색하는 반응형 웹앱입니다. 무협 게임의 두루마리 세계지도에서 영감을 받은 수묵 청록산수 지도(한지 바탕, 물결무늬 바다, 먹 음영과 석청·석록 산세, 붓글씨 지명, 낙관과 윤도 나침반, 흐르는 구름), 직접 제작한 산·길·해 로고와 Pretendard·나눔명조·나눔손글씨 붓을 사용합니다. 지도 탐험 외에 직접 캐릭터를 조작하는 3인칭 여행 시뮬레이션을 제공합니다.
 
-[수묵 지도 미리보기](docs/previews/landmark-map.png) · [수묵 지도 상세](docs/previews/map-detail-ink.png) · [여행 시뮬레이션 미리보기](docs/previews/journey.png) · [경복궁](docs/previews/journey-palace.png) · [불국사 노을](docs/previews/journey-sunset.png) · [하회마을 달밤](docs/previews/journey-night.png) · [남한강 수상 경공](docs/previews/journey-water.png) · [설악산 운해](docs/previews/journey-clouds.png) · [순천만 갈대](docs/previews/journey-reeds.png) · [경복궁 전망 정자](docs/previews/journey-viewpoint.png) · [제운종](docs/previews/journey-soar.png) · [수상 비연](docs/previews/journey-dash.png) · [수원 고도(古都)](docs/previews/journey-town.png) · [남한강 유등·풍등](docs/previews/journey-lanterns.png) · [모바일 미리보기](docs/previews/journey-mobile.png)
+[수묵 지도 미리보기](docs/previews/landmark-map.png) · [수묵 지도 상세](docs/previews/map-detail-ink.png) · [여행 시뮬레이션 미리보기](docs/previews/journey.png) · [경복궁](docs/previews/journey-palace.png) · [불국사 노을](docs/previews/journey-sunset.png) · [하회마을 달밤](docs/previews/journey-night.png) · [남한강 수상 경공](docs/previews/journey-water.png) · [설악산 운해](docs/previews/journey-clouds.png) · [순천만 갈대](docs/previews/journey-reeds.png) · [경복궁 전망 정자](docs/previews/journey-viewpoint.png) · [제운종](docs/previews/journey-soar.png) · [수상 비연](docs/previews/journey-dash.png) · [수원 고도(古都)](docs/previews/journey-town.png) · [설악산 바위 암벽](docs/previews/journey-rocks.png) · [남한강 유등·풍등](docs/previews/journey-lanterns.png) · [모바일 미리보기](docs/previews/journey-mobile.png)
 
 ## 온라인 데모
 
@@ -68,14 +68,14 @@ Chrome이 설치되어 있고 개발 서버가 실행 중인 환경에서는 `no
 
 ### 여행 공간 그래픽
 
-무협 MMORPG의 산수화 같은 화면을 참고해 웹에서 구현한 연출입니다. 모든 모델과 셰이더는 이 프로젝트에서 직접 작성했습니다.
+무협 MMORPG의 산수화 같은 화면을 참고해 웹에서 구현한 연출입니다. 셰이더와 건축·자연 모델은 이 프로젝트에서 직접 작성했고, 주인공 인물과 동작, 바위, 환경광에는 CC0(퍼블릭 도메인) 공개 자료를 다듬어 썼습니다.
 
-- **빛과 대기**: 물리 기반 하늘 돔(구름·태양·달·별)과 같은 하늘에서 구운 환경광, 높이 안개와 골짜기 물안개, 태양 빛줄기, GTAO 앰비언트 오클루전, 블룸, 필름 톤매핑과 색보정
+- **빛과 대기**: 물리 기반 하늘 돔(구름·태양·달·별), Poly Haven 실사 HDRI로 만든 시간대별 환경광(태양은 지우고 하늘·지면 반사광만 남겨 각 시간대 하늘 색으로 보정), 높이 안개와 골짜기 물안개, 태양 빛줄기, GTAO 앰비언트 오클루전, 블룸, 필름 톤매핑과 색보정
 - **지형**: 원본 고도를 Catmull-Rom 보간해 약 4m 격자로 세분하고 잔디·흙·바위·모래·낙엽·마사토를 경사와 토지 피복에 따라 섞습니다. 주변 약 29 × 29km의 실제 산줄기와 해안을 원경으로 표시합니다.
 - **전통 건축**: OSM 건물 윤곽을 직사각형 칸으로 나눠 팔작·맞배·우진각·초가지붕을 올립니다. 처마 곡선(앙곡·안허리), 기와, 막새, 서까래, 용마루·추녀마루, 궁궐의 양성바름·취두·잡상, 기둥·창방·공포와 단청, 창호, 장대석 기단과 계단, 중층 전각을 표현하며 가까운 건물에는 세부 목구조를 스트리밍합니다. 전주·하회마을 골목에는 기와 돌담이 이어집니다.
-- **자연**: 바람에 흔들리는 소나무·활엽수·메타세쿼이아·관목, GPU 잔디, 들꽃 군락, 순천만 갈대밭, 바위, 보성 차밭 이랑, 꽃잎·낙엽, 밤의 반딧불, 하늘을 도는 학 무리. 먼 숲은 이어진 수관으로 표현합니다.
+- **자연**: 바람에 흔들리는 소나무·활엽수·메타세쿼이아·관목, GPU 잔디, 들꽃 군락, 순천만 갈대밭, 실사 스캔 바위와 가파른 비탈의 암벽, 보성 차밭 이랑, 꽃잎·낙엽, 밤의 반딧불, 하늘을 도는 학 무리. 먼 숲은 이어진 수관으로 표현합니다.
 - **물과 구름**: 물가에서는 장면을 실시간으로 비추는 수면 반사(고품질), 물결과 프레넬 반사를 씁니다. 높은 산에서는 실제 주변 골짜기 고도를 따라 운해가 차오르고 봉우리가 그 위로 솟습니다.
-- **인물**: 그린 얼굴(검미·눈매), 높이 묶은 긴 머리와 뒷머리, 자수를 놓은 비단 도포와 얇은 겉옷 자락, 넓은 소매, 옥 노리개, 등에 멘 검과 술을 갖춘 협객. 네 갈래 도포 자락과 소매, 머리카락, 띠는 천·끈 물리로 움직이며 다리와 몸통에 부딪히지 않습니다. 걷기·달리기·도약·공중제비·활공·착지 자세가 이어지고 달밤에는 등롱을 듭니다.
+- **인물**: 뼈대가 있는 VRoid 샘플 인물(CC0)을 협객으로 다시 꾸몄습니다. 흰 비단 도포와 남색 단, 옥색 속옷, 띠와 옥 노리개, 넓은 소매, 상투와 은관, 긴 머리, 등에 멘 검과 술을 갖췄습니다. 서기·걷기·달리기·질주·도약·착지·구르기는 Quaternius의 모션 캡처 동작(CC0)을 불러올 때 VRM 뼈대에 리타깃해 씁니다. 걸음은 속도에 맞춰 위상을 맞춘 채 섞습니다. 활공·비연·제운종·천근추·공중제비 자세는 그 위에 절차적으로 겹칩니다. 도포 자락과 소매 자락, 겉옷, 머리카락, 띠는 천·끈 물리로 움직입니다. 눈을 깜박이고 달밤에는 등롱을 듭니다. 모델을 불러오지 못하면 코드로 만든 인물로 대신합니다.
 - **경공**: 3단 도약·활공·비연·제운종·천근추·벽호공·능파보와 기력, 재사용 대기시간. 기술마다 자세(앞공중제비, 나선 회전, 비행 자세, 벽 달리기, 착지 구르기)가 다르고, 잔상, 양 소매와 발끝의 빛 궤적, 기운 입자, 흙먼지, 물보라, 충격파, 카메라 흔들림과 기울기, 속도선과 방사형 흐림이 따라붙습니다.
 - **게임 화면**: 여행 화면은 전체 화면으로 열리며 먹색 바탕에 금테를 두른 HUD를 씁니다. 초상화와 기력·수련 게이지, 원형 미니맵과 시각(午時·酉時·子時), 여행 수첩, 경공 단축창(재사용 대기 표시), 지역 진입 타이틀, 강호 소식 창, 머리 위 이름표와 기술 이름 붓글씨, 경공 비급(도움말)이 있습니다.
 - **고도(古都) 연출**: 실제 건물 윤곽은 모두 전통 건축으로 그리고(배치와 길은 실제), 은행·벚꽃·단풍 가로수와 숲, 먼 산의 단풍·꽃 무리, 골목을 오가는 마을 사람, 골목 위 등롱 줄, 석등, 붓글씨 깃발, 물 위 나룻배를 둡니다.
@@ -102,7 +102,9 @@ Chrome이 설치되어 있고 개발 서버가 실행 중인 환경에서는 `no
 - `src/three/hanok.ts`: 전통 건축 생성기(지붕·처마·공포·단청·창호·기단)
 - `src/three/buildings.ts`: 건물 분류와 평면 분해, 근경 세부 스트리밍, 현대 건물, 돌담
 - `src/three/vegetation.ts`: 나무·잔디·바위·차밭
-- `src/three/character.ts`: 협객 모델, 걷기·달리기·도약·활공 자세, 천·머리카락 물리
+- `src/three/avatar.ts`: 주인공 인물(VRM) 불러오기, 동작 리타깃, 걸음 혼합, 경공 자세 합성, 잔상
+- `src/three/character.ts`: 천·머리카락 물리, 대체용 절차적 협객
+- `src/three/probes.ts`: 시간대별 HDRI 환경광
 - `src/three/motion.ts`: 경공 이동(도약·활공·비연·제운종·천근추·벽호공·능파보, 기력과 대기시간)
 - `src/three/npcs.ts`, `src/three/props.ts`: 마을 사람과 거리 소품(등롱 줄, 석등, 깃발, 나룻배)
 - `src/three/fx.ts`: 도약 기운, 착지 먼지, 수면 물결, 공중 궤적
@@ -110,13 +112,15 @@ Chrome이 설치되어 있고 개발 서버가 실행 중인 환경에서는 `no
 - `src/three/scenery.ts`: 연출된 풍경(기암 봉우리, 폭포, 정자, 연꽃, 유등)
 - `src/three/water.ts`, `src/three/ambient.ts`, `src/three/signature.ts`: 수면과 실시간 반사, 꽃잎·반딧불, 장소별 상징 지형
 - `src/three/placeStyles.ts`: 장소별 건축 양식·수종·연출 설정
-- `src/three/textures.ts`: CC0 질감 불러오기와 절차적 텍스처 도구
+- `src/three/textures.ts`: CC0 질감·스캔 바위 불러오기와 절차적 텍스처 도구
 - `src/three/world.ts`: 발견 판정
 - `src/three/geo.ts`: 좌표 변환, 고도 보간, 다각형 충돌과 안전한 출발점
 - `public/geo/`: 12개 지역의 로컬 공간 데이터와 출처
 - `scripts/build-geoscenes.mjs`: 벡터·고도 타일 수집 및 좌표 변환
 - `scripts/build-far-terrain.mjs`: 주변 원경 고도(약 29km, 150m 간격) 추가
 - `public/textures/`: CC0 지면·건축 질감과 출처(`CREDITS.json`)
+- `public/models/`, `public/env/`: CC0 인물·동작·바위 모델과 HDRI, 각 출처(`CREDITS.json`)
+- `scripts/pack-avatar.py`, `scripts/pack-hdri.py`: 인물·동작 파일과 HDRI를 웹용으로 줄이고 다시 칠하는 도구
 - `src/three/landmarks.ts`: 직접 제작한 입체 건축·자연 모델
 - `src/three/mapLandmarks.ts`: 지도 좌표와 입체 랜드마크 연결
 - `src/data.ts`: 관광지 데이터와 검색·필터 함수
@@ -131,9 +135,11 @@ Chrome이 설치되어 있고 개발 서버가 실행 중인 환경에서는 `no
 
 사진은 Wikimedia Commons에서 가져왔으며 각 원본의 라이선스가 적용됩니다. 앱의 왼쪽 하단 정보 버튼에서 개별 출처와 라이선스를 볼 수 있습니다. 사진은 화면에 맞게 잘라 표시합니다. 로고와 사진 로딩 실패 시 표시하는 일러스트는 이 프로젝트에서 제작했습니다.
 
-[Pretendard](https://github.com/orioncactus/pretendard)는 로컬 가변 WOFF2 파일로 포함했습니다. SIL Open Font License 원문은 `public/fonts/OFL.txt`에 있습니다. 지도의 붓글씨와 명조체는 [나눔명조](https://fonts.google.com/specimen/Nanum+Myeongjo)와 [나눔손글씨 붓](https://fonts.google.com/specimen/Nanum+Brush+Script)(SIL OFL 1.1, `public/fonts/OFL-Nanum.txt`)을 Google Fonts의 글자 범위별 조각으로 받아 `public/fonts/nanum-*`에 두고 `src/fonts.css`에서 필요한 조각만 불러옵니다. 입체 모델과 여행 공간은 [Three.js](https://threejs.org/)로 직접 구성했습니다.
+[Pretendard](https://github.com/orioncactus/pretendard)는 로컬 가변 WOFF2 파일로 포함했습니다. SIL Open Font License 원문은 `public/fonts/OFL.txt`에 있습니다. 지도의 붓글씨와 명조체는 [나눔명조](https://fonts.google.com/specimen/Nanum+Myeongjo)와 [나눔손글씨 붓](https://fonts.google.com/specimen/Nanum+Brush+Script)(SIL OFL 1.1, `public/fonts/OFL-Nanum.txt`)을 Google Fonts의 글자 범위별 조각으로 받아 `public/fonts/nanum-*`에 두고 `src/fonts.css`에서 필요한 조각만 불러옵니다. 입체 모델과 여행 공간은 [Three.js](https://threejs.org/)로 구성했습니다.
 
 여행 공간의 지면·회벽·목재·수피 질감은 [ambientCG](https://ambientcg.com)의 CC0(퍼블릭 도메인) 자료를 512px로 줄여 사용합니다. 자료별 원본은 `public/textures/CREDITS.json`에 있습니다. 기와·단청·창호·초가·나뭇잎·물결 텍스처는 코드로 생성합니다.
+
+주인공 인물은 VRoid 프로젝트(pixiv)의 [VRoid Studio CC0 샘플 아바타](https://opengameart.org/content/vroid-studio-cc0-models) "Base_Male"을, 동작은 Quaternius의 [Universal Animation Library](https://quaternius.com/packs/universalanimationlibrary.html)를 사용합니다. 바위(rock_07, rock_09, boulder_01, rock_face_01)와 HDRI(alps_field, hilly_terrain_01, kloppenheim_02)는 [Poly Haven](https://polyhaven.com) 자료입니다. 모두 CC0이며 웹용으로 줄이고 옷 색을 바꾸는 등 손질했습니다. 자세한 내용은 `public/models/CREDITS.json`과 `public/env/CREDITS.json`에 있습니다.
 
 ## 현재 범위와 운영 시 고려사항
 

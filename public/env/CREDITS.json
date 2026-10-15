@@ -1,0 +1,12 @@
+{
+  "license": "CC0 1.0 Universal (public domain)",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "provider": "Poly Haven",
+  "providerUrl": "https://polyhaven.com/hdris",
+  "note": "1K HDRIs halved to 512x256 by scripts/pack-hdri.py, sun disc clamped (the scene's directional light carries direct sun) and graded toward the matching procedural sky.",
+  "probes": {
+    "day": "https://polyhaven.com/a/alps_field",
+    "sunset": "https://polyhaven.com/a/hilly_terrain_01",
+    "night": "https://polyhaven.com/a/kloppenheim_02"
+  }
+}
